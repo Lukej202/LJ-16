@@ -1,0 +1,45 @@
+# Compiled Verilog simulations
+*_sim
+*.vvp
+*.out
+
+# Simulation waveforms
+*.vcd
+*.fst
+*.lxt
+*.lxt2
+
+# Python cache and virtual environments
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Build artifacts
+build/
+dist/
+*.log
+
+# Editor temporary files
+*.swp
+*.swo
+*~
+
+# VS Code local settings
+.vscode/
+
+# FPGA synthesis artifacts
+.Xil/
+*.jou
+*.bit
+*.dcp
+*.runs/
+*.cache/
+*.gen/
+*.sim/
+*.hw/
+
+# Operating system files
+.DS_Store
+Thumbs.db
