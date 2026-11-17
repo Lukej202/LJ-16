@@ -1,5 +1,5 @@
 module alu (
-    input wire [4:0] opcode,
+    input wire [4:0] alu_op,
     input wire [15:0] a,
     input wire [15:0] b,
     input wire carry_in,
@@ -17,7 +17,7 @@ module alu (
         temp_result = 17'h00000;
         carry_out = 1'b0;
         borrow_out = 1'b0;
-        case (opcode)
+        case (alu_op)
             5'b00000: begin // ADD
                 result = a + b;
                 carry_out = (result < a); // Set carry_out if overflow occurs
@@ -34,8 +34,8 @@ module alu (
             5'b00111: result = a >> 1; // Shift right
             5'b01000: result = (a < b) ? 16'h0001 : 16'h0000; // SLT
             5'b01001: result = a << 1; // MUL by 2
-            5'b01010: result = 16'h0000; // JMP
-            // add later 5'b01011: result = a % b; // MOD
+
+
             5'b01100: result = a; // PASS A
             5'b01101: result = b; // PASS B
             5'b01110: result = a + 1; // INC
@@ -68,7 +68,7 @@ module alu (
         endcase
         zero_flag = (result == 16'h0000) ? 1'b1 : 1'b0; // Set zero flag
         negative_flag = result[15]; // Set negative flag based on MSB
-        signed_overflow_flag = ((opcode == 5'b00000 || opcode == 5'b11001) && ((a[15] == b[15]) && (result[15] != a[15]))) ? 1'b1 : 1'b0; // Set signed overflow flag for ADD and ADD with carry
+        signed_overflow_flag = ((alu_op == 5'b00000 || alu_op == 5'b11001) && ((a[15] == b[15]) && (result[15] != a[15]))) ? 1'b1 : 1'b0; // Set signed overflow flag for ADD and ADD with carry
     end
 
 endmodule
